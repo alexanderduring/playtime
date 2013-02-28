@@ -1,0 +1,6 @@
+
+# Local configuration
+config/autoload/local.php
+
+# NetBeans IDE
+/nbproject
