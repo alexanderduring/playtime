@@ -1,13 +1,15 @@
 <?php
-/**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/ZendSkeletonApplication for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- */
 
 return array(
+    'controllers' => array(
+        'invokables' => array(
+            'Application\Controller\Index' => 'Application\Controller\IndexController',
+            'Application\Controller\Static' => 'Application\Controller\StaticController'
+        )
+    ),
+    'musicDirectory' => array(
+        'path' => 'path/to/your/musicDirectory'
+    ),
     'router' => array(
         'routes' => array(
             'home' => array(
@@ -19,6 +21,26 @@ return array(
                         'action'     => 'index',
                     ),
                 ),
+            ),
+            'static' => array(
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => array(
+                    'route'    => '/static/:type/:filekey',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Static',
+                        'action'     => 'get'
+                    )
+                )
+            ),
+            'show' => array(
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => array(
+                    'route'    => '/show/:filekey',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action'     => 'show'
+                    )
+                )
             ),
             // The following is a route to simplify getting started creating
             // new controllers and actions without needing to create a new
@@ -55,6 +77,7 @@ return array(
     'service_manager' => array(
         'factories' => array(
             'translator' => 'Zend\I18n\Translator\TranslatorServiceFactory',
+            'musicDirectory' => 'Application\Service\MusicDirectoryFactory'
         ),
     ),
     'translator' => array(
@@ -65,11 +88,6 @@ return array(
                 'base_dir' => __DIR__ . '/../language',
                 'pattern'  => '%s.mo',
             ),
-        ),
-    ),
-    'controllers' => array(
-        'invokables' => array(
-            'Application\Controller\Index' => 'Application\Controller\IndexController'
         ),
     ),
     'view_manager' => array(

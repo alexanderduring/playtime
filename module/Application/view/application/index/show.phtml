@@ -1,0 +1,64 @@
+<?php
+    $this->headScript()->appendFile('/js/soundmanager/soundmanager2.js', 'text/javascript');
+    $this->headScript()->appendScript("
+function setupSoundManager() {
+  soundManager.setup({
+    url: '/js/soundmanager/swf/',
+    flashVersion: 9, // optional: shiny features (default = 8)
+    useFlashBlock: false, // optionally, enable when you're ready to dive in
+    onready: function() {
+      // Ready to use; soundManager.createSound() etc. can now be called.
+      soundManager.createSound({
+        id: 'air',
+        url: '/static/mp3/".$this->filekey."'
+      });
+    }
+  });
+}
+
+function initButtons() {
+    jQuery('#play').click(doPlay);
+    pauseButton = jQuery('#pause');
+    pauseButton.click(doPause);
+    pauseButton.hide();
+}
+
+function doPlay() {
+    soundManager.play('air');
+    playButton = jQuery('#play');
+    playButton.unbind('click');
+    playButton.click(doResume);
+    playButton.hide();
+    pauseButton = jQuery('#pause');
+    pauseButton.show();
+}
+
+function doPause() {
+    soundManager.pause('air');
+    playButton = jQuery('#play');
+    playButton.show();
+    pauseButton = jQuery('#pause');
+    pauseButton.hide();
+}
+
+function doResume() {
+    soundManager.resume('air');
+    playButton = jQuery('#play');
+    playButton.hide();
+    pauseButton = jQuery('#pause');
+    pauseButton.show();
+}
+
+
+jQuery().ready(function(){
+    setupSoundManager();
+    initButtons();
+});
+");
+
+?>
+<p>
+    <span><?php echo $this->file['name'].' ('.$this->file['path'].')'; ?></span>
+    <a id="play" href="javascript:void()">Play</a>
+    <a id="pause" href="javascript:void()">Pause</a>
+</p>
