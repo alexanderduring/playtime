@@ -12,19 +12,4 @@
  */
 
 return array(
-    'doctrine' => array(
-        'connection' => array(
-            'orm_default' => array(
-                'driverClass' => 'Doctrine\DBAL\Driver\PDOMySql\Driver',
-                'params' => array(
-                    'host' => 'localhost',
-                    'port' => '3306',
-                    'user' => '<set this login in your local.php>',
-                    'password' => '<set this password in your local.php>',
-                    'dbname' => 'playtime',
-                    'charset' => 'utf8'
-                )
-            )
-        )
-    )
 );

@@ -3,6 +3,4 @@
 composer
 bin
 zendframework
-doctrine
-symfony
 autoload.php
