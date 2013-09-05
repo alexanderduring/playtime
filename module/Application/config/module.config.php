@@ -32,6 +32,16 @@ return array(
                     )
                 )
             ),
+            'list' => array(
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => array(
+                    'route'    => '/list',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action'     => 'list'
+                    )
+                )
+            ),
             'show' => array(
                 'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(
